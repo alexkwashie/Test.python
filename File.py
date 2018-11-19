@@ -118,18 +118,29 @@ def callss():
 
 callss()
 '''
-
+######################################################
+"""import difflib
+this is a library used to to compare 2 words
+from difflib import get_close_matches :
+this is helps match 2 letters;
+eg:  get_close_matches("rain", ["pain","rainn","ain"])
+>>>['rainn', 'ain', 'pain'] #it also arranges it by best matched"""
+######################################################
 import json
+import difflib
+from difflib import get_close_matches
 
 info = json.load(open("data.json", 'r'))
 
-ask = input("Please Enter a word-:")
+ask = input("Please Enter a word-:").lower()
 
 def translate(word):
-        return info[word]
+        if word in info:
+                return info[word]
+        elif  len(get_close_matches(word, info.keys())) > 0:
+                return "Did you mean %s instead" %get_close_matches(word, info.keys())[0]
+                return otherword[0]
+        else:
+                return "'"+word +"'"+ " doesnt exist"
 
 print(translate(ask))
-
-
-
-
