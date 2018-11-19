@@ -132,15 +132,29 @@ from difflib import get_close_matches
 
 info = json.load(open("data.json", 'r'))
 
-ask = input("Please Enter a word-:").lower()
+carry_on = True
+while carry_on:
 
-def translate(word):
-        if word in info:
-                return info[word]
-        elif  len(get_close_matches(word, info.keys())) > 0:
-                return "Did you mean %s instead" %get_close_matches(word, info.keys())[0]
-                return otherword[0]
-        else:
-                return "'"+word +"'"+ " doesnt exist"
+        ask = input("Please Enter a word-:").lower()
+
+        def translate(word):
+                if word in info:
+                        return info[word]
+                elif  len(get_close_matches(word, info.keys())) > 0:
+                        wed = input("Did you mean %s instead? Press Y to accept & N to Decline?" %get_close_matches(word, info.keys())[0])
+
+                        if wed.lower() == "y":
+                                return info[get_close_matches(word, info.keys())[0]]
+
+                        elif wed.lower() =="n":
+                                return "NOT RIGHT"
+                else:
+                        pol = input("'"+word +"'"+ " doesnt exist, Do you want to search again?")
+
+                        if pol == "y":
+                                continue
+                        else:
+                                carry_on = False
+
 
 print(translate(ask))
