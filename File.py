@@ -125,7 +125,8 @@ from difflib import get_close_matches :
 this is helps match 2 letters;
 eg:  get_close_matches("rain", ["pain","rainn","ain"])
 >>>['rainn', 'ain', 'pain'] #it also arranges it by best matched"""
-######################################################
+#####################################################
+'''
 import json
 import difflib
 from difflib import get_close_matches
@@ -161,8 +162,12 @@ while conp:
         else:
                 for  item in output:
                         print(item)
+'''
 
 
+#####################################################
+Using Pandas
+#####################################################
 In [1]: import pandas
 
 In [2]: table = pandas.DataFrame([[2,3,6,8,4],[9,8,5,7,3]])
@@ -173,19 +178,41 @@ Out[3]:
 0  2  3  6  8  4
 1  9  8  5  7  3
 
-In [4]: table = pandas.DataFrame([[2,3,6,8,4],[9,8,5,7,3]], column = ["Mon", "Tue", "Wed", "Thu", "Fri"], index = [1,2])
----------------------------------------------------------------------------
-TypeError                                 Traceback (most recent call last)
-<ipython-input-4-2d0b5b525f8a> in <module>
-----> 1 table = pandas.DataFrame([[2,3,6,8,4],[9,8,5,7,3]], column = ["Mon", "Tue", "Wed", "Thu", "Fri"], index = [1,2])
+In [4]: table =pandas.DataFrame([[2,3,6,8,4],[9,8,5,7,3]], columns = ["Mon", "Tue", "Wed", "Thu", "Fri"], index = [1,2])
 
-TypeError: __init__() got an unexpected keyword argument 'column'
-
-In [5]: table = pandas.DataFrame([[2,3,6,8,4],[9,8,5,7,3]], columns = ["Mon", "Tue", "Wed", "Thu", "Fri"], index = [1,2])
-
-In [6]: table
+In [5]: table
 Out[6]:
    Mon  Tue  Wed  Thu  Fri
 1    2    3    6    8    4
 2    9    8    5    7    3
 
+
+Working with Jupyter notebook
+1. Navigate to the foler in terminal sn execute: jypyter Notebook
+
+2. To work with file on the OS, use following commands:
+import os
+import pandas
+
+2a. Read/display data:
+data= pandas.read_json("address.json")
+data= pandas.read_excel("address.xlxs", sheetname=0)
+
+3. Use to list file in directory for:
+os.listdir()
+
+4. Set ID as index:
+data.set_index('ID')
+
+5.to find help in pandas use:
+pandas.read_***?
+eg. pandas.read_csv?
+
+6. To open txt files or files sereated by a ';':
+data= pandas.read_csv("address_semi-colons.txt", sep=";")
+
+7.Set a column as an index:
+data1 = data1.set_index("Address")
+
+8.Select a field:
+data1.loc["332 Hill St":"551 Alvarado St","Name":"Employees"]
