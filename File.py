@@ -132,9 +132,10 @@ from difflib import get_close_matches
 
 info = json.load(open("data.json", 'r'))
 
-carry_on = True
-while carry_on:
 
+conp = True
+
+while conp:
         ask = input("Please Enter a word-:").lower()
 
         def translate(word):
@@ -147,14 +148,44 @@ while carry_on:
                                 return info[get_close_matches(word, info.keys())[0]]
 
                         elif wed.lower() =="n":
-                                return "NOT RIGHT"
-                else:
-                        pol = input("'"+word +"'"+ " doesnt exist, Do you want to search again?")
+                                wod = input("'"+word+"'"+ " doesnt exist. Press 'a' to search for another word-:")
+                                return wod
 
-                        if pol == "y":
-                                continue
-                        else:
-                                carry_on = False
+                        elif wed.lower() =="a":
+                                pass
+
+        output = (translate(ask))
+
+        if type(output) == str:
+                print(output)
+        else:
+                for  item in output:
+                        print(item)
 
 
-print(translate(ask))
+In [1]: import pandas
+
+In [2]: table = pandas.DataFrame([[2,3,6,8,4],[9,8,5,7,3]])
+
+In [3]: table
+Out[3]:
+   0  1  2  3  4
+0  2  3  6  8  4
+1  9  8  5  7  3
+
+In [4]: table = pandas.DataFrame([[2,3,6,8,4],[9,8,5,7,3]], column = ["Mon", "Tue", "Wed", "Thu", "Fri"], index = [1,2])
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-4-2d0b5b525f8a> in <module>
+----> 1 table = pandas.DataFrame([[2,3,6,8,4],[9,8,5,7,3]], column = ["Mon", "Tue", "Wed", "Thu", "Fri"], index = [1,2])
+
+TypeError: __init__() got an unexpected keyword argument 'column'
+
+In [5]: table = pandas.DataFrame([[2,3,6,8,4],[9,8,5,7,3]], columns = ["Mon", "Tue", "Wed", "Thu", "Fri"], index = [1,2])
+
+In [6]: table
+Out[6]:
+   Mon  Tue  Wed  Thu  Fri
+1    2    3    6    8    4
+2    9    8    5    7    3
+
