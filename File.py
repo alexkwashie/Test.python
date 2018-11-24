@@ -216,3 +216,33 @@ data1 = data1.set_index("Address")
 
 8.Select a field:
 data1.loc["332 Hill St":"551 Alvarado St","Name":"Employees"]
+
+9. Position based selection, use iloc:
+data1.iloc[0:2,0:3]
+data1.iloc[1,0:3]
+
+10. Select a cell by mixing a string and integer, can use only ix:
+data1.ix[1, "Name"] - Works tho but is deprecated
+
+11.To drop/Delete column or row:
+Colomn = data.drop("Address", 1)
+row = data.drop("332 Hill St", 0)
+###To drop a group of rows/colomns
+data.drop([0:3], 1 or 0)
+
+12. Adding a colomn:
+data['Continents']=data.shape[0]*['North Americas']
+[data.shape] will list the amount of rows and colomns
+
+13. Adding an existing columns data to another colomn
+data['Continents']=data["Country"]+","+"North Americas"
+
+14. To add a new row:
+i. Convert row ID to colomns by adding '.T':
+dataT = data.T
+
+ii. Add following sections
+dataT['144 Gill'] = ['United Kingdom','30','7','Lexo','Westland','UK,Europe']
+
+iii. Convert colomns back to index by adding [.T]:
+ data = dataT.T
