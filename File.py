@@ -246,3 +246,9 @@ dataT['144 Gill'] = ['United Kingdom','30','7','Lexo','Westland','UK,Europe']
 
 iii. Convert colomns back to index by adding [.T]:
  data = dataT.T
+
+15. Using geopy for locations:
+i. from geopy.geocoders import Nominatim
+ii. nom = Nominatim(scheme = "http")
+iii. nom.geocode("3995 23rd St, San Francisco, CA 94114")
+>>>Location(3995, 23rd Street, Noe Valley, SF, California, 94114, USA, (37.7529648, -122.4317141, 0.0))
