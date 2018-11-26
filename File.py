@@ -248,7 +248,85 @@ iii. Convert colomns back to index by adding [.T]:
  data = dataT.T
 
 15. Using geopy for locations:
+a.
 i. from geopy.geocoders import Nominatim
 ii. nom = Nominatim(scheme = "http")
 iii. nom.geocode("3995 23rd St, San Francisco, CA 94114")
 >>>Location(3995, 23rd Street, Noe Valley, SF, California, 94114, USA, (37.7529648, -122.4317141, 0.0))
+
+16. Converting address string to Logitude and latitude values
+i. n = nom.geocode("3995 23rd St, San Francisco, CA 94114")
+
+n.latitude
+>>>37.7529648
+n.Longitude
+>>>-122.4317141
+
+17. Converting a a full address  into latitude and Longitude
+i. First import Nominatim
+from geopy.geocoders import Nominatim
+
+ii. Add the full addresses together:
+df['Address'] = df['Address']+','+df['City']+','+df['State']+','+df['Country']
+
+ii.Put the  Nominatim fetch command  into a variable:
+nom = Nominatim() or nom = Nominatim(scheme = "http")
+
+iii. Creat a new colomn and apply the geocode:
+df['Cordinates']=df['Address'].apply(nom.geocode)
+
+...Use 'df.Cordinates[0]' to see each full output:
+>>>Location(3666, 21st Street, Noe Valley, SF, California, 94114, USA, (37.756488877551, -122.429343346939, 0.0))
+
+... or df.Cordinates[0].latitude
+>>>37.756488877551
+
+
+18. Creating a new column with only longitude & latitude values:
+i. df['latitude']= df['Cordinates'].apply(lambda x: x.latitude)
+
+ii.df['longitude']= df['Cordinates'].apply(lambda y: y.longitude)
+
+NOTE: if the is an error in any of the addresses, it will return an error/NaN:
+So you use a python tenary operator:
+eg: df['latitude']= df['Cordinates'].apply(lambda x: x.latitude if x !=None else None)
+"which means apply ... if its note equal to none, else insect 'None'."
+
+Numpy:
+1. import numpy
+n = numpy.arange(27)
+n
+>>>array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+       17, 18, 19, 20, 21, 22, 23, 24])
+
+2. n.reshape(3,3,3):
+>>>array([[[ 0,  1,  2],
+        [ 3,  4,  5],
+        [ 6,  7,  8]],
+
+       [[ 9, 10, 11],
+        [12, 13, 14],
+        [15, 16, 17]],
+
+       [[18, 19, 20],
+        [21, 22, 23],
+        [24, 25, 26]]])
+
+3. Converting an array to numpylist:
+m=numpy.asarray()[[12,132,345,23,21,, [],[]]]
+
+4. Image processing with openCV:
+i. import cv2
+
+ii. img = cv2.imread("smallgray.png",0)
+Note: 0 is to view image in gray/black&white and 1 is to view the image in RGB.colored
+
+iii. img
+>>>array([[187, 158, 104, 121, 143],
+       [198, 125, 255, 255, 147],
+       [209, 134, 255,  97, 182]], dtype=uint8)
+
+5. To convert a numpy array to an image:
+cv2.imwrite("newpic.png",img)
+>>>True
+(This will create a new picture in the folder)
