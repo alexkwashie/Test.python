@@ -164,7 +164,7 @@ while conp:
                         print(item)
 '''
 
-
+'''
 #####################################################
 Using Pandas
 #####################################################
@@ -330,3 +330,112 @@ iii. img
 cv2.imwrite("newpic.png",img)
 >>>True
 (This will create a new picture in the folder)
+
+6. Indexing, slicing & iterating:
+i. for i in img:
+    print(i)
+>>>[187 158 104 121 143]
+        [198 125 255 255 147]
+        [209 134 255  97 182]
+
+ii. for searching through columns:
+...Convert it to a tabular form by switching sides:
+for i in img.T:
+    print(i)
+    >>>[187 198 209]
+        [158 125 134]
+        [104 255 255]
+        [121 255  97]
+        [143 147 182]
+
+iii. using flat:
+for i in img.flat:
+    print(i)
+>>>187
+158
+104
+121
+143
+198
+125
+255
+255
+147
+209
+134
+255
+97
+182
+
+7. Horizontal Stack
+ims= numpy.hstack((img,img)) (i.e use a tuple)
+ims
+>>>array([[*187, 158, 104, 121, 143, *187, 158, 104, 121, 143],
+                [*198, 125, 255, 255, 147, *198,125, 255, 255, 147],
+                [*209, 134, 255,  97, 182, *209, 134, 255,  97, 182]], dtype=uint8)
+
+8. Vertical Stack:
+imv = numpy.vstack((img,img))
+imv
+>>>array([[*187, 158, 104, 121, 143],
+                [198, 125, 255, 255, 147],
+                [209, 134, 255,  97, 182],
+                [*187, 158, 104, 121, 143],
+                 [198, 125, 255, 255, 147],
+                [209, 134, 255,  97, 182]], dtype=uint8)
+
+
+9. Spliting an array vertically
+lsi = numpy.vsplit(imv,3)
+lsi
+>>>[array([[187, 158, 104, 121, 143],
+        [198, 125, 255, 255, 147]], dtype=uint8),
+        array([[209, 134, 255,  97, 182],
+        [187, 158, 104, 121, 143]], dtype=uint8),
+        array([[198, 125, 255, 255, 147],
+        [209, 134, 255,  97, 182]], dtype=uint8)]
+
+ii. Spliting an array horizontally:
+lsi = numpy.hsplit(imv,3)
+
+
+Working with Folium mapsself.
+
+1. Create/Find a point on a map
+Import folium
+map = folium.Map(location = [57.23, -81.97])
+
+i. Save the map file as an HTML
+map.save("Map1.html")
+
+**Use Help(folium.Map) to find more examples ot apply
+
+ii. map = folium.Map(location = [57.23, -81.97], zoom_start = 10, tile = "Mapbox bright")
+
+2. Adding a marker on the map:
+map.add_child(folium.Marker(location=[53.34,-75.33], popup ="Hi, I am here", icon = folium.Icon("red")))
+
+2a. OR, Use a Feature group to make code more organized:
+fg = folium.FeatureGroup(name = "My Map")
+fg.add_child(folium.Marker(location=[53.34,-75.33], popup ="Hi, I am here", icon = folium.Icon("red")))
+
+3. iterating through a list of cordinates:
+fg = folium.FeatureGroup(name = "My Map")
+
+for cordinates in [[53.34,-75.33], [53.14,-65.33]]:
+        fg.add_child(folium.Marker(location=cordinates, popup ="Hi, I am here", icon = folium.Icon("red")))
+
+'''
+
+import folium
+
+map = folium.Map(location=[53.34,-75.33], zoom_start=10, tiles="Mapbox Bright")
+
+fg = folium.FeatureGroup(name = "My Map")
+
+for cordinates in [[53.34,-75.33], [53.14,-65.33]]:
+        fg.add_child(folium.Marker(location=cordinates, popup ="Hi, I am here", icon = folium.Icon("red")))
+
+map.add_child(fg)
+
+map.save("new.html")
