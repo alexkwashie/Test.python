@@ -453,6 +453,18 @@ fg = folium.FeatureGroup(name = "My Map")
 for i,j,d  in zip(lat,lon_g, desc):
         fg.add_child(folium.CircleMarker(location=[i,j], popup =str(d) + 'm', fill_color = elechange(d), color= 'grey', fill_opacity = 0.6))
 
+#Adding Geojson polygon
+fg.add_child(folium.GeoJson(data=open('115 world.json', 'r', encoding='UTF-8-sig').read(), style_function=lambda x: {'fillColor':'green' if x['properties']['POP2005'] < 2000000
+else 'orange' if x['properties']['POP2005'] >  2000000 and x['properties']['POP2005'] < 100000000 else 'blue' }))
+
+#1. Use the to add the color/ color display command
+#2. x: represent the dictionary objetc
+#3. eg Labda function
+'''l = lambda x: x**2
+l(5)
+>>>25
+'''
+
 
 map.add_child(fg)
 
