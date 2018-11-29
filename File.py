@@ -438,12 +438,20 @@ lat = data['LAT']
 lon_g = data['LON']
 desc = data['ELEV']
 
+def elechange(a):
+        if a < 1000:
+                return 'red'
+        elif a > 1000 and  a < 2000:
+                return 'blue'
+        else:
+                return 'green'
+
 map = folium.Map(location=[38.321015, -111.139220], zoom_start=5, tiles="Mapbox Bright")
 
 fg = folium.FeatureGroup(name = "My Map")
 #folium.Marker only accepts strings so rap any other value in the 'str()'
 for i,j,d  in zip(lat,lon_g, desc):
-        fg.add_child(folium.Marker(location=[i,j], popup =str(d), icon = folium.Icon("red")))
+        fg.add_child(folium.Marker(location=[i,j], popup =str(d), icon = folium.Icon(elechange(d))))
 
 
 map.add_child(fg)
