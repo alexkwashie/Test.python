@@ -451,7 +451,7 @@ map = folium.Map(location=[38.321015, -111.139220], zoom_start=5, tiles="Mapbox 
 fg = folium.FeatureGroup(name = "My Map")
 #folium.Marker only accepts strings so rap any other value in the 'str()'
 for i,j,d  in zip(lat,lon_g, desc):
-        fg.add_child(folium.Marker(location=[i,j], popup =str(d), icon = folium.Icon(elechange(d))))
+        fg.add_child(folium.CircleMarker(location=[i,j], popup =str(d) + 'm', fill_color = elechange(d), color= 'grey', fill_opacity = 0.6))
 
 
 map.add_child(fg)
