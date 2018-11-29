@@ -225,26 +225,26 @@ data1.iloc[1,0:3]
 data1.ix[1, "Name"] - Works tho but is deprecated
 
 11.To drop/Delete column or row:
-Colomn = data.drop("Address", 1)
+Column = data.drop("Address", 1)
 row = data.drop("332 Hill St", 0)
-###To drop a group of rows/colomns
+###To drop a group of rows/columns
 data.drop([0:3], 1 or 0)
 
-12. Adding a colomn:
+12. Adding a column:
 data['Continents']=data.shape[0]*['North Americas']
-[data.shape] will list the amount of rows and colomns
+[data.shape] will list the amount of rows and columns
 
-13. Adding an existing columns data to another colomn
+13. Adding an existing columns data to another column
 data['Continents']=data["Country"]+","+"North Americas"
 
 14. To add a new row:
-i. Convert row ID to colomns by adding '.T':
+i. Convert row ID to columns by adding '.T':
 dataT = data.T
 
 ii. Add following sections
 dataT['144 Gill'] = ['United Kingdom','30','7','Lexo','Westland','UK,Europe']
 
-iii. Convert colomns back to index by adding [.T]:
+iii. Convert columns back to index by adding [.T]:
  data = dataT.T
 
 15. Using geopy for locations:
@@ -426,15 +426,25 @@ for cordinates in [[53.34,-75.33], [53.14,-65.33]]:
         fg.add_child(folium.Marker(location=cordinates, popup ="Hi, I am here", icon = folium.Icon("red")))
 
 '''
-
+import pandas
 import folium
 
-map = folium.Map(location=[53.34,-75.33], zoom_start=10, tiles="Mapbox Bright")
+data = pandas.read_csv('Volcanoes_USA.txt')
+
+#data.columns
+#data["LAT"]
+
+lat = data['LAT']
+lon_g = data['LON']
+desc = data['ELEV']
+
+map = folium.Map(location=[38.321015, -111.139220], zoom_start=5, tiles="Mapbox Bright")
 
 fg = folium.FeatureGroup(name = "My Map")
+#folium.Marker only accepts strings so rap any other value in the 'str()'
+for i,j,d  in zip(lat,lon_g, desc):
+        fg.add_child(folium.Marker(location=[i,j], popup =str(d), icon = folium.Icon("red")))
 
-for cordinates in [[53.34,-75.33], [53.14,-65.33]]:
-        fg.add_child(folium.Marker(location=cordinates, popup ="Hi, I am here", icon = folium.Icon("red")))
 
 map.add_child(fg)
 
