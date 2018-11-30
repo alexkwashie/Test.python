@@ -448,14 +448,17 @@ def elechange(a):
 
 map = folium.Map(location=[38.321015, -111.139220], zoom_start=5, tiles="Mapbox Bright")
 
-fg = folium.FeatureGroup(name = "My Map")
+#Create a feature group to display tht valcanoes
+fgv = folium.FeatureGroup(name = "Volcanoes")
 #folium.Marker only accepts strings so rap any other value in the 'str()'
 for i,j,d  in zip(lat,lon_g, desc):
-        fg.add_child(folium.CircleMarker(location=[i,j], popup =str(d) + 'm', fill_color = elechange(d), color= 'grey', fill_opacity = 0.6))
+        fgv.add_child(folium.CircleMarker(location=[i,j], popup =str(d) + 'm', fill_color = elechange(d), color= 'grey', fill_opacity = 0.6))
 
+#Create a feature group to display the Population
+fgp = folium.FeatureGroup(name = "Population")
 #Adding Geojson polygon
-fg.add_child(folium.GeoJson(data=open('115 world.json', 'r', encoding='UTF-8-sig').read(), style_function=lambda x: {'fillColor':'green' if x['properties']['POP2005'] < 2000000
-else 'orange' if x['properties']['POP2005'] >  2000000 and x['properties']['POP2005'] < 100000000 else 'blue' }))
+fgp.add_child(folium.GeoJson(data=open('115 world.json', 'r', encoding='UTF-8-sig').read(), style_function=lambda x: {'fillColor':'green' if x['properties']['POP2005'] < 2000000
+else 'orange' if x['properties']['POP2005'] >  2000000 and x['properties']['POP2005'] < 100000000 else 'blue' }), )
 
 #1. Use the to add the color/ color display command
 #2. x: represent the dictionary objetc
@@ -464,8 +467,10 @@ else 'orange' if x['properties']['POP2005'] >  2000000 and x['properties']['POP2
 l(5)
 >>>25
 '''
+fgv.add_child(folium.Popup("A plain pop up string"))
 
-
-map.add_child(fg)
+map.add_child(fgv)
+map.add_child(fgp)
+map.add_child(folium.LayerControl())
 
 map.save("new.html")
