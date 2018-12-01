@@ -399,7 +399,9 @@ ii. Spliting an array horizontally:
 lsi = numpy.hsplit(imv,3)
 
 
-Working with Folium mapsself.
+###################################################
+WORKING WITH FOLIUM MAPS
+###################################################
 
 1. Create/Find a point on a map
 Import folium
@@ -426,6 +428,9 @@ for cordinates in [[53.34,-75.33], [53.14,-65.33]]:
         fg.add_child(folium.Marker(location=cordinates, popup ="Hi, I am here", icon = folium.Icon("red")))
 
 '''
+###################################################
+###################################################
+
 import pandas
 import folium
 
@@ -446,7 +451,9 @@ def elechange(a):
         else:
                 return 'green'
 
-map = folium.Map(location=[38.321015, -111.139220], zoom_start=5, tiles="Mapbox Bright")
+
+
+map = folium.Map(location=[38.321015, -111.139220], zoom_start=5)
 
 #Create a feature group to display tht valcanoes
 fgv = folium.FeatureGroup(name = "Volcanoes")
@@ -463,14 +470,20 @@ else 'orange' if x['properties']['POP2005'] >  2000000 and x['properties']['POP2
 #1. Use the to add the color/ color display command
 #2. x: represent the dictionary objetc
 #3. eg Labda function
-'''l = lambda x: x**2
+''' l = lambda x: x**2
 l(5)
 >>>25
 '''
-fgv.add_child(folium.Popup("A plain pop up string"))
+def countr_name():
+        l = lambda x: x['properties']['NAME']
+        return l
+
+fgp.add_child(folium.Popup(countr_name()))
 
 map.add_child(fgv)
 map.add_child(fgp)
+
+#This adds a layerControl to the amps which allows you to select different parts of the map
 map.add_child(folium.LayerControl())
 
 map.save("new.html")
