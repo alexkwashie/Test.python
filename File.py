@@ -428,6 +428,8 @@ for cordinates in [[53.34,-75.33], [53.14,-65.33]]:
         fg.add_child(folium.Marker(location=cordinates, popup ="Hi, I am here", icon = folium.Icon("red")))
 
 '''
+
+'''
 ###################################################
 ###################################################
 
@@ -470,10 +472,11 @@ else 'orange' if x['properties']['POP2005'] >  2000000 and x['properties']['POP2
 #1. Use the to add the color/ color display command
 #2. x: represent the dictionary objetc
 #3. eg Labda function
-''' l = lambda x: x**2
-l(5)
->>>25
-'''
+# l = lambda x: x**2
+#l(5)
+#>>>25
+
+
 def countr_name():
         l = lambda x: x['properties']['NAME']
         return l
@@ -487,3 +490,17 @@ map.add_child(fgp)
 map.add_child(folium.LayerControl())
 
 map.save("new.html")
+
+'''
+
+import time
+from datetime import datetime  as dt
+import os
+
+hostname = r"~/Desktop/hosts"
+redirect = "127.0.0.1"
+website = ["facebook.com","www.facebook","www.youtube.com","youtube.com"]
+
+while True:
+        print(1)
+        time.sleep(5)
