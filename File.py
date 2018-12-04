@@ -497,10 +497,21 @@ import time
 from datetime import datetime  as dt
 import os
 
-hostname = r"~/Desktop/hosts"
+hostname = os.path.expanduser(r"~/Desktop/hostss")
 redirect = "127.0.0.1"
-website = ["facebook.com","www.facebook","www.youtube.com","youtube.com"]
+website = ["facebook.com","www.facebook.com","www.youtube.com","youtube.com"]
 
 while True:
-        print(1)
+        if dt(dt.now().year, dt.now().month, dt.now().day, 8) < dt.now() < dt(dt.now().year, dt.now().month, dt.now().day, 22):
+                print("Working on input...")
+                with open(hostname,"r+") as file:
+                        content = file.read()
+                        for web in website:
+                                if web in content:
+                                        pass
+                                else:
+                                        file.write(redirect+"  "+web+'\n')
+        else:
+                print("We are in Fun days")
         time.sleep(5)
+
