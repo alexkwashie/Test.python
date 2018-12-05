@@ -73,7 +73,7 @@ if len(nes) > len(last):
         print(nes[-1])
 '''
 
-
+#FILE HANDLING
 #Create a file
 '''
 filename = "sample.txt"
@@ -102,6 +102,7 @@ def create_file():
 #call function to create file when executed
 create_file()
 '''
+
 '''
 import time
 import datetime
@@ -502,7 +503,7 @@ redirect = "127.0.0.1"
 website = ["facebook.com","www.facebook.com","www.youtube.com","youtube.com"]
 
 while True:
-        if dt(dt.now().year, dt.now().month, dt.now().day, 8) < dt.now() < dt(dt.now().year, dt.now().month, dt.now().day, 22):
+        if dt(dt.now().year, dt.now().month, dt.now().day, 8) < dt.now() < dt(dt.now().year, dt.now().month, dt.now().day, 12):
                 print("Working on input...")
                 with open(hostname,"r+") as file:
                         content = file.read()
@@ -512,6 +513,13 @@ while True:
                                 else:
                                         file.write(redirect+"  "+web+'\n')
         else:
+                with open(hostname,"r+") as file:
+                        content = file.readlines()
+                        file.seek(0)#start from the beginning
+                        for line in content:
+                                if not any(web in line for web in website):#if not any(there is no) web in line is like the way web is in website
+                                        file.write(line)#rewrite the line the whole line and do the same for the next line....
+                        file.truncate()#removes everything else after line has been written
                 print("We are in Fun days")
         time.sleep(5)
 
