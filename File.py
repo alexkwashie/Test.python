@@ -515,11 +515,23 @@ while True:
         else:
                 with open(hostname,"r+") as file:
                         content = file.readlines()
-                        file.seek(0)#start from the beginning
+                        file.seek(0)#put pointer to the start or beginning
                         for line in content:
-                                if not any(web in line for web in website):#if not any(there is no) web in line is like the way web is in website
+                                if not any(web in line for web in website):#if not any(there is no) web in line, like the way web is in website
                                         file.write(line)#rewrite the line the whole line and do the same for the next line....
                         file.truncate()#removes everything else after line has been written
                 print("We are in Fun days")
         time.sleep(5)
+
+        #Use Cron (crontab -e) teo enable run script in the backgroung ofter reboot
+        #'@reboot python3 ~/privatr/etc/host'
+
+###############
+Heroku
+
+1. heroku login
+2. heroku create #newapp
+3. heroku apps
+4.
+###############
 
